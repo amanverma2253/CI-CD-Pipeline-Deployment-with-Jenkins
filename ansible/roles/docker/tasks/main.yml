@@ -1,0 +1,30 @@
+- name: Update apt cache
+  apt:
+    update_cache: yes
+  when: ansible_facts['os_family'] == 'Debian'
+
+- name: Install Docker
+  apt:
+    name: docker.io
+    state: latest
+    update_cache: yes
+  when: ansible_facts['os_family'] == 'Debian'
+
+- name: Ensure Docker group exists
+  group:
+    name: docker
+    state: present
+
+- name: Start and enable Docker service
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Add current user to Docker group
+  user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: yes
+  become: yes
+  when: ansible_user != 'root'

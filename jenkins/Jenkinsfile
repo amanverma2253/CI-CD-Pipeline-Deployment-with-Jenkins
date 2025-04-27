@@ -1,0 +1,9 @@
+
+@Library('commonPipeline') _
+
+commonPipeline {
+    gitRepo = 'https://github.com/your-user/your-springboot-app.git'
+    dockerImage = 'your-dockerhub-user/springboot-app'
+    k8sNamespace = 'default'
+    k8sDeploymentName = 'springboot-app'
+}

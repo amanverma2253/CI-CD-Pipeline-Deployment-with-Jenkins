@@ -1,0 +1,23 @@
+{
+    // Use systemd as the cgroup driver for better compatibility with Kubernetes
+    "exec-opts": ["native.cgroupdriver=systemd"],
+
+    // Configure the logging driver and options
+    "log-driver": "json-file",
+    "log-opts": {
+        "max-size": "100m",  // Limit the size of log files
+        "max-file": "3"      // Keep a maximum of 3 log files
+    },
+
+    // Use overlay2 as the storage driver for better performance
+    "storage-driver": "overlay2",
+
+    // Optional: Enable experimental features if needed
+    "experimental": false,
+
+    // Optional: Configure default runtime
+    "default-runtime": "runc",
+
+    // Optional: Add live-restore to keep containers running during daemon restarts
+    "live-restore": true
+}
